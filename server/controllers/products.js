@@ -18,8 +18,7 @@ async function createData(req, res) {
         }
         else {
             await Product.create(req.body)
-            const allProducts = await Product.find({})
-            res.status(201).send(allProducts)
+            res.status(201).send("Product created successfully")
         }
     } catch {
         res.status(500).json("Some error occured in creating product")

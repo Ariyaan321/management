@@ -17,8 +17,7 @@ async function createData(req, res) {
         }
         else {
             await User.create(req.body)
-            const allUsers = await User.find({})
-            res.status(201).send(allUsers)
+            res.status(201).send("User created successfully")
         }
     } catch {
         res.status(500).json("Some error occured while creating user")

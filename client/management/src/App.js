@@ -1,9 +1,8 @@
-import './App.css';
-
+import Table from './Tables/mainTable'
 function App() {
   return (
     <>
-      <h2>Hello World!</h2>
+      <Table />
     </>
   );
 }
