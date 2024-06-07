@@ -13,7 +13,7 @@ export default function ProductPopup(vals = "") {      // vals == "" for Add Use
     function formToJSON(e) {
         return (
             {
-                "ProductName": e.productName.value,
+                "ProductName": e.prodName.value,
                 "Price": e.price.value,
             }
         )
@@ -36,21 +36,20 @@ export default function ProductPopup(vals = "") {      // vals == "" for Add Use
     return (
         <>
             {editpop && (
-                <div className="editformdiv">
-
-                    <span onClick={() => { setEditpop(!editpop) }}>&times;</span>
-                    <form className="form" onSubmit={handleSubmit}>
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <span onClick={() => { setEditpop(!editpop) }} className="absolute cursor-pointer text-red-700 text-4xl font-extrabold ml-[310px] mt-[-260px] w-fit h-fit text-center hover:text-blue-700 duration-300">&times;</span>
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-fit ml-8' >
                         {
-                            vals.vals !== "" ? <h3>Update details</h3> : <h3>Add details</h3>
+                            vals.vals !== "" ? <h3 className="font-medium text-white backdrop-blur-xl">Update details</h3> : <h3 className="font-medium mt-[-25px] text-white backdrop-blur-xl">Add details</h3>
                         }
-                        <input type="text" name="productName" value={productName} onChange={handleProductName} placeholder="Product Name" />
-                        <input type="number" name="price" value={price} onChange={handlePrice} placeholder="Price" />
-                        <input type="submit" value="submit" className="submitt" />
+                        <input type="text" name="prodName" value={productName} onChange={handleProductName} placeholder="Product Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[250px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <input type="number" name="price" value={price} onChange={handlePrice} placeholder="Price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <input type="submit" value="submit" className="w-fit font-medium px-4 py-2 text-white backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200" />
                         {
                             apiResponse !== "" &&
-                            <h4 >
+                            <p className="text-sm text-white">
                                 {apiResponse}
-                            </h4>
+                            </p>
                         }
                     </form>
                 </div>

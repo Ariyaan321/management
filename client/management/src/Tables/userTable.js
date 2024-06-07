@@ -20,46 +20,49 @@ const UserTable = () => {
 
     return (
         <>
-            <div className="body">
+            <div>
                 {
                     isError !== "" && <h1>Error occured: {isError}</h1>
                 }
-                <div className="tablecss">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                dbData.map((val, key) => {
-                                    return (
-                                        <tr id="trodd" key={key}>
-                                            <td>{val.Username}</td>
-                                            <td>{val.Email}</td>
-                                            <td>{val.Phone}</td>
-                                            <td className="actionbutton">
-                                                <button onClick={() => {
-                                                    setEditpop(!editpop)
-                                                    setPopupValues(val)
-                                                }}>Edit</button>
-                                                <button onClick={async () => {
-                                                    const res = await ApiData('delete', val, val._id)
-                                                    alert(res)
-                                                }}>Delete</button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+            <div className=''>
+                <table className='shadow 2xl border-2 border-cyan-200 w-[700px]'>
+                    <thead className=''>  {/*no matter width */}
+                        <tr className=''> {/*no matter width */}
+                            <th className='w-[710px] border-solid border-2 border-rose-600 py-3 bg-cyan-800'>Username</th> {/*no matter */}
+                            <th className='w-[200px] border-solid border-2 border-orange-600 py-3 bg-cyan-800 '>Email</th>
+                            <th className='w-[200px] py-3 border-solid border-2 border-yellow-600 bg-cyan-800'>Phone</th>
+                            <th className=' w-[200px] py-3 border-solid border-2 border-yellow-600 b-cyan-800'>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className=''>
+                        {
+                            dbData.map((val, key) => {
+                                return (
+                                    <tr key={key} className='' >
+                                        <td className='w-[233px] absolute overflow-x-auto py-3 px-6 border-solid border-2 border-red-500 text-center    '>{val.Username}</td>
+                                        <td className='w-[233px] overflow-x-auto py-3 px-6 border-solid border-2 border-red-500'>{val.Email}</td>
+                                        <td className='w-[233px] overflow-x-auto py-3 px-6'>{val.Phone}</td>
+                                        <td className='w-[233px] overflow-x-auto py-3 px-6'>
+                                            <button onClick={() => {
+                                                setEditpop(!editpop)
+                                                setPopupValues(val)
+                                            }}>Edit</button>
+                                            <button onClick={async () => {
+                                                const res = await ApiData('delete', val, val._id)
+                                                alert(res)
+                                            }}>Delete</button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
 
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
                 {/* For Edit popup */}
                 {
                     editpop && (
@@ -68,11 +71,11 @@ const UserTable = () => {
                 }
                 {/* For Edit popup */}
 
-                <button className="addUser" onClick={() => {
+                <button onClick={() => {
                     setEditpop(!editpop)
                     setPopupValues("")
                 }}>Add User</button>
-            </div>
+            </div >
         </>
     )
 }

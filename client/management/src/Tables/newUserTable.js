@@ -2,14 +2,14 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion"
 import axios from 'axios';
-import ProductPopup from './addEditPopups/productPopup';
+import UserPopup from './addEditPopups/userPopup';
 import ApiData from "../MyApi/apiData";
 import EditPen from "./editPen.png"
 import DeleteIcn from "./deleteIcn.png"
 
-const ProductTable = () => {
+const UserTable = () => {
     const [editpop, setEditpop] = useState(false);
-    const [popupValues, setPopupValues] = useState({ "ProductName": "default" });
+    const [popupValues, setPopupValues] = useState({ "Username": "default" });
     const [dbData, setDbData] = useState([]);
     const [isError, setIsError] = useState("");
 
@@ -39,7 +39,7 @@ const ProductTable = () => {
     const boxShadowColors = ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#800080', '#FFA500', '#FFC0CB', '#A52A2A', '#000000', '#FFFFFF'];
 
     useEffect(() => {
-        axios.get("http://localhost:8080/products")
+        axios.get("http://localhost:8080/users")
             .then((res) => setDbData(res.data))
             .catch((err) => setIsError(err.message))
 
@@ -61,11 +61,12 @@ const ProductTable = () => {
             </div>
 
             <div className='overflow-x-auto px-[24px] pb-1 w-[1000px] h-screen rounded-lg'>
-                <table className='w-[50vw] divide-y divide-gray-200'>
+                <table className='w-full divide-y divide-gray-200'>
                     <thead className='bg-black'>
                         <tr>
-                            <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Product Name</th>
-                            <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Price</th>
+                            <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Username</th>
+                            <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Email</th>
+                            <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Phone</th>
                             <th className='px-6 py-3 text-left text-sm font-bold text-gray-500 uppercase tracking-wider'>Action</th>
                         </tr>
                     </thead>
@@ -83,10 +84,13 @@ const ProductTable = () => {
                                 ></motion.div >
                                 <tr key={index} className={`${index % 2 === 0 ? 'bg-black' : 'bg-blue-300 text-black'} hover:scale-105 duration-75`}>
                                     <td className='px-6 py-4 whitespace-nowrap max-w-xs overflow-x-auto'>
-                                        <div className='text-md font-medium'>{data.ProductName}</div>
+                                        <div className='text-md font-medium'>{data.Username}</div>
                                     </td>
                                     <td className='px-6 py-4 whitespace-nowrap max-w-xs overflow-x-auto'>
-                                        <div className='text-md font-light'>{data.Price}</div>
+                                        <div className='text-md font-light'>{data.Email}</div>
+                                    </td>
+                                    <td className='px-6 py-4 whitespace-nowrap max-w-xs overflow-x-auto'>
+                                        <div className='text-md font-light '>{data.Phone}</div>
                                     </td>
                                     <td className='px-6 py-4 whitespace-nowrap text-md font-medium flex gap-[10px]'>
                                         <div>
@@ -105,7 +109,7 @@ const ProductTable = () => {
                                             <button
                                                 className='ml-4 text-red-600 hover:text-red-900'
                                                 onClick={async () => {
-                                                    const res = await ApiData('delete', data, data._id, false)
+                                                    const res = await ApiData('delete', data, data._id)
                                                     alert(res)
                                                 }}
                                             >
@@ -120,11 +124,11 @@ const ProductTable = () => {
                     </tbody>
                 </table>
 
-                <div className='flex w-[50vw]'>
+                <div className='flex'>
                     {/* For Edit popup */}
                     {
                         editpop && (
-                            <ProductPopup vals={popupValues} />
+                            <UserPopup vals={popupValues} />
                         )
                     }
                     {/* For Edit popup */}
@@ -141,4 +145,4 @@ const ProductTable = () => {
     )
 }
 
-export default ProductTable;
+export default UserTable
